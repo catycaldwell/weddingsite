@@ -1,0 +1,57 @@
+{.section collection}
+
+  <!-- Create index sections -->
+
+  {.repeated section collections}
+  <div id="{urlId}-section" class="index-section{.section mainImage}{.or} no-main-image{.end} {typeName}" data-url-id="{urlId}" data-collection-id="{id}"
+    {.collectionTypeNameEquals? page}data-edit-main-image="Background"{.end} {.collectionTypeNameEquals? album}data-edit-main-image="Background"{.end}
+  >
+    <div class="index-section-wrapper{.section mainImage} has-main-image{.or}{.end}">
+
+      <!-- For Pages -->
+
+      {.collectionTypeNameEquals? page}
+        {.section mainImage}
+        <div class="index-section-image content-fill">
+          <img {@|image-meta} data-load="viewport"/>
+        </div>
+        <div class="index-image-overlay"></div>
+        {.end}
+        <div class="content page-content{.section mainImage} has-main-image tmpl-loading{.end}" id="{urlId}-page" data-url-id="{urlId}">
+          <div class="content-inner{.section mainContent} has-content{.end}">
+            {mainContent}
+          </div>
+        </div>
+      {.end}
+
+      <!-- For Galleries -->
+
+      {.collectionTypeNameEquals? gallery}
+      <div class="content gallery-content clear" id="{urlId}-gallery" data-url-id="{urlId}">
+        <div class="content-inner has-content">
+          {@|apply index-gallery.block}
+        </div>
+      </div>
+      {.end}
+
+      <!-- For Albums -->
+
+      {.collectionTypeNameEquals? album}
+        {.section mainImage}
+        <div class="album-section index-section-image content-fill">
+          <img {@|image-meta} data-load="false"/>
+        </div>
+        <div class="index-image-overlay"></div>
+        {.end}
+        <div class="content album-content{.section mainImage} has-main-image tmpl-loading{.end}" id="{urlId}-album" data-url-id="{urlId}">
+          <div class="content-inner has-content">
+            {@|apply index-album.block}
+          </div>
+        </div>
+      {.end}
+
+    </div>
+  </div>
+  {.end}
+
+{.end}
